@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: api-gateway
+    env: node
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: cd ../frontend && npm install && npm run build && cd ../backend && npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false          # Set this manually in Render dashboard
+      - key: JWT_SECRET
+        sync: false          # Set this manually in Render dashboard
+      - key: JWT_EXPIRES_IN
+        value: 24h
+      - key: ADMIN_EMAIL
+        sync: false          # Set your admin email in Render dashboard
+      - key: ADMIN_PASSWORD
+        sync: false          # Set your admin password in Render dashboard
